@@ -12,6 +12,7 @@ get("/") do
   "Hello World"
 "
 <h1>Dice Roll</h1>
+
 <ul>
   <li><a href=\"/dice/2/6\">Roll two 6-sided dice</a></li>
   <li><a href=\"/dice/2/10\">Roll two 10-sided dice</a></li>
@@ -49,11 +50,11 @@ get ("/dice/2/10") do
 end
 
 get("/dice/1/20") do
-  die = rand(1..20)
-	
-	@outcome = "You rolled a #{die}."
-	
-	erb(:one_twenty)
+  @die = rand(1..20)
+
+  @outcome = "You rolled a #{@die}."
+
+  erb(:one_twenty)
 end
 
 get("/dice/5/4") do
@@ -70,4 +71,16 @@ end
 
 get("/") do
   erb(:elephant)
+end
+
+get("/dice/100/6") do
+  @rolls = []    # Create a blank array
+
+  100.times do    # 100 times...
+    die = rand(1..6)    # Generate a random number
+
+    @rolls.push(die)    # Add the random number to the array 
+  end
+
+  erb(:one_hundred_six)
 end
